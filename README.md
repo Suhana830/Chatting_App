@@ -9,8 +9,8 @@
    <li>express</li>
 </ul>
 In socket.io every user is client ,a msg broadcast to all the socket that you make
-https://github.com/Suhana830/Chatting_App/assets/115086135/66353cde-dc74-43d1-b89f-b7b6bc8e4003)
-(https://github.com/Suhana830/Chatting_App/assets/115086135/8a9ae045-43ca-474d-b2bb-fc37fda7bc54)
+![WhatsApp Image 2024-04-12 at 6 07 59 PM](https://github.com/Suhana830/Chatting_App/assets/115086135/659fa457-c744-451a-a6dd-b02a9a0a88d1)
+![WhatsApp Image 2024-04-12 at 6 08 32 PM](https://github.com/Suhana830/Chatting_App/assets/115086135/43d20c55-7513-4c23-b1f7-19f6dffca1a8)
 
 
 the tranmission result

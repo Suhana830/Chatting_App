@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatting Application</title>
+</head>
+
+<style>
+    .body {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #message {
+        position: relative;
+    }
+
+    .container {
+        margin: auto;
+
+        padding: 5px;
+        width: 60vw;
+        height: 60vh;
+
+        /* border:2px solid black; */
+        background-image: url("./gradientimage.avif");
+        background-repeat: no-repeat;
+        background-size: 60vw 60vh;
+        overflow-y: scroll;
+    }
+
+    .box {
+        height: 100vh;
+    }
+
+    .whiteBox {
+        position: absolute;
+        bottom: 0px;
+    }
+
+    .input {
+        padding: 10px;
+        margin: 10px;
+        width: 60vw;
+        border-radius: 12px;
+    }
+
+    .room {
+        padding: 10px;
+        margin: 10px;
+        border-radius: 12px;
+    }
+
+    #sendBnt {
+        padding: 10px;
+        width: 100px;
+        background-color: #9898d3;
+        margin: 5px;
+    }
+
+    #msgl {
+        background-color: white;
+        border-radius: 5px;
+        padding: 2px;
+        font-weight: 300;
+        width: max-content;
+        margin: 10px;
+        float:left;
+        clear:both;
+    }
+    #msgr{
+
+        background-color: white;
+        border-radius: 5px;
+        padding: 2px;
+        font-weight: 300;
+        width: max-content;
+        margin: 10px;
+        float:right;
+        clear:both;
+    }
+
+</style>
+
+<body>
+
+
+    <h1>Chatting App</h1>
+    <div class="box">
+
+        <div class="container">
+
+
+            <div id="message"></div>
+
+        </div>
+
+        <div class="whiteBox">
+            <div>Id : <span id="Id"></span></div>
+            <span>message</span>
+            <input type="text" class="input" id="input" />
+            <button id="sendBnt">Send</button>
+            <span>Send To</span>
+            <input type="text" class="room " id="room" />
+            <button id="roomBnt">Set Room</button>
+        </div>
+
+    </div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+
+        const name = prompt("Enter your name");
+        socket.on("connect",()=>{
+            
+            socket.emit("user-connected",name);
+           
+        })
+
+        const msgInput = document.getElementById('input');
+        const sendbnt = document.getElementById('sendBnt');
+        const message = document.getElementById("message");
+        let cnt = 0;
+      
+
+       
+        socket.on("message", (msg) => {
+
+           
+            
+            const para = document.createElement("div");
+            if(cnt===0){
+              para.setAttribute("id", "msgl");
+            }
+            else{
+            para.setAttribute("id", "msgr");
+            }
+
+            cnt = 1 - cnt;
+
+            para.innerHTML =   `<h6 style="padding:0px; color:blue; margin:0px">${msg.name}</h6><p style="margin:0px">${msg.content}</p>`;
+           
+            message.appendChild(para);
+
+        })
+       
+
+        sendbnt.addEventListener("click", (e) => {
+
+            const msg = msgInput.value;
+            socket.emit("message", msg);
+            
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>
